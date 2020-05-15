@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gunmunity.R;
-import com.example.gunmunity.model.Result;
+import com.example.gunmunity.model.CommunityListModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdapter.ViewHoler> {
-    List<Result> results;
+    ArrayList<CommunityListModel> lists = new ArrayList<>();
     Context context;
 
     public CommunityMainAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(List<Result> results) {
-        this.results = new ArrayList<>();
-        this.results = results;
+    public void setData(List<CommunityListModel> lists) {
+        this.lists.addAll(lists);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -38,16 +38,16 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
-        Result list = results.get(position);
+        CommunityListModel list = lists.get(position);
         holder.title.setText("title : " + list.getTitle());
-        holder.content.setText("content : " + list.getBody());
-        holder.time.setText("time : " + list.getId());
-        holder.comment.setText("comment : " + list.getUserId());
+        holder.content.setText("content : " + list.getContent());
+        holder.time.setText("time : " + list.getTime());
+        holder.comment.setText("comment : " + list.getComment());
     }
 
     @Override
     public int getItemCount() {
-        return results !=null ? results.size() : 0;
+        return lists !=null ? lists.size() : 0;
     }
 
     class ViewHoler extends RecyclerView.ViewHolder {

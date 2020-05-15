@@ -4,19 +4,19 @@
     <item
         android:id="@+id/nav_community"
         android:title="Community"
-        android:icon="@drawable/ic_battery_20_black_24dp"
+        android:icon="@drawable/ic_community"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/nav_calculator"
         android:title="Calculator"
-        android:icon="@drawable/ic_battery_30_black_24dp"
+        android:icon="@drawable/ic_calculator"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/nav_asset"
         android:title="Asset"
-        android:icon="@drawable/ic_battery_50_black_24dp"
+        android:icon="@drawable/ic_money"
         app:showAsAction="ifRoom"/>
 
 </menu>
