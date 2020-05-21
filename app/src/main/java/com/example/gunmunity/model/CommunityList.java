@@ -4,12 +4,14 @@ public class CommunityList {
     private String title;
     private String content;
     private String time;
+    private String nickname;
     private int comment;
 
     public CommunityList() {
         title = "포상휴가 어떻게 받아요?";
         content = "코로나 때문에 휴가 못나가고 있는데 포상휴가 받고 싶다 포상휴가 받는 방법 좀";
         time = "2020.5.12 16:00";
+        nickname = "무적해병";
         comment = 2;
     }
 
@@ -35,6 +37,14 @@ public class CommunityList {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 
     public int getComment() {

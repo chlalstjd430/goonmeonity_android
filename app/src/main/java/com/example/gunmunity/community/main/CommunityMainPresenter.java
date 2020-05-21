@@ -2,7 +2,7 @@ package com.example.gunmunity.community.main;
 
 import android.util.Log;
 
-public class CommunityMainPresenter implements CommnuityMainContract.Presenter {
+public class CommunityMainPresenter implements CommunityMainContract.Presenter {
 
 
     @Override

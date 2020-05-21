@@ -1,6 +1,6 @@
 package com.example.gunmunity.community.main;
 
-public interface CommnuityMainContract {
+public interface CommunityMainContract {
     interface View {
         void goToDetailCommunity();
     }

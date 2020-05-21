@@ -1,6 +1,7 @@
 package com.example.gunmunity.community.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gunmunity.R;
-import com.example.gunmunity.community.CommunityDetailFragment;
+import com.example.gunmunity.community.CommunityDetailActivity;
 import com.example.gunmunity.model.CommunityList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommunityMainFragment extends Fragment implements CommnuityMainContract.View {
+public class CommunityMainFragment extends Fragment implements CommunityMainContract.View {
 
     private RecyclerView mRecyclerView;
     private CommunityMainPresenter presenter;
@@ -84,9 +85,8 @@ public class CommunityMainFragment extends Fragment implements CommnuityMainCont
     }
 
     public void goToDetailCommunity() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new CommunityDetailFragment())
-                .addToBackStack(null).commit();
+        Intent intent = new Intent(getActivity(), CommunityDetailActivity.class);
+        startActivity(intent);
     }
 
 }

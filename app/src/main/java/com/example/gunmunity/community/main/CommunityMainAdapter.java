@@ -41,10 +41,10 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
         CommunityList list = lists.get(position);
-        holder.title.setText("title : " + list.getTitle());
-        holder.content.setText("content : " + list.getContent());
-        holder.time.setText("time : " + list.getTime());
-        holder.comment.setText("comment : " + list.getComment());
+        holder.title.setText(list.getTitle());
+        holder.content.setText(list.getContent());
+        holder.time.setText(list.getTime());
+        holder.comment.setText(list.getComment());
     }
 
     @Override
