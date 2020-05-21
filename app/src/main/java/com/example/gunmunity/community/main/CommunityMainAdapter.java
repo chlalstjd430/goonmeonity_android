@@ -1,4 +1,4 @@
-package com.example.gunmunity.community;
+package com.example.gunmunity.community.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,20 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gunmunity.R;
-import com.example.gunmunity.model.CommunityListModel;
+import com.example.gunmunity.model.CommunityList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdapter.ViewHoler> {
-    ArrayList<CommunityListModel> lists = new ArrayList<>();
+    ArrayList<CommunityList> lists = new ArrayList<>();
+    CommunityMainFragment mFragment;
     Context context;
 
-    public CommunityMainAdapter(Context context) {
+    public CommunityMainAdapter(Context context, CommunityMainFragment fragment) {
         this.context = context;
+        mFragment = fragment;
     }
 
-    public void setData(List<CommunityListModel> lists) {
+    public void setData(List<CommunityList> lists) {
         this.lists.addAll(lists);
         notifyDataSetChanged();
     }
@@ -31,14 +33,14 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
     @NonNull
     @Override
     public ViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_community,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_community, parent, false);
 
         return new ViewHoler(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
-        CommunityListModel list = lists.get(position);
+        CommunityList list = lists.get(position);
         holder.title.setText("title : " + list.getTitle());
         holder.content.setText("content : " + list.getContent());
         holder.time.setText("time : " + list.getTime());
@@ -47,7 +49,7 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
 
     @Override
     public int getItemCount() {
-        return lists !=null ? lists.size() : 0;
+        return lists != null ? lists.size() : 0;
     }
 
     class ViewHoler extends RecyclerView.ViewHolder {
@@ -63,6 +65,13 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
             content = itemView.findViewById(R.id.item_content);
             time = itemView.findViewById(R.id.item_time);
             comment = itemView.findViewById(R.id.item_comment);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mFragment.goToDetailCommunity();
+                }
+            });
         }
     }
 }

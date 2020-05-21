@@ -1,4 +1,4 @@
-package com.example.gunmunity.community;
+package com.example.gunmunity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,15 +8,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gunmunity.R;
+import com.example.gunmunity.community.main.CommunityMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CommunityMainActivity extends AppCompatActivity {
+public class GunmunityMainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community_main);
+        setContentView(R.layout.activity_gunmunity_main);
         initView();
     }
 
