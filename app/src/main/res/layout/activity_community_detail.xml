@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="글 상세보기"
         android:textSize="14sp"
+        android:textColor="@color/colorBlack"
         android:layout_marginLeft="8dp"
         app:layout_constraintStart_toEndOf="@+id/ic_back_arrow"
         app:layout_constraintTop_toTopOf="@+id/ic_back_arrow"
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:text="닉네임"
         android:textSize="14dp"
+        android:textColor="@color/colorBlack"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ic_back_arrow"/>
@@ -48,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="시간"
         android:textSize="12dp"
+        android:textColor="@color/colorBlack"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_nickname"/>
@@ -58,6 +61,7 @@
         android:layout_height="wrap_content"
         android:text="글 제목"
         android:textSize="14dp"
+        android:textColor="@color/colorBlack"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_time"/>
@@ -69,6 +73,7 @@
         android:lineSpacingMultiplier="1.3"
         android:text="글 내용"
         android:textSize="12dp"
+        android:textColor="@color/colorBlack"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_title"/>
@@ -87,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="13"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_content"/>
 

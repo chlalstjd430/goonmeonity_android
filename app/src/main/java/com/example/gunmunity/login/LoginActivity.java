@@ -3,6 +3,8 @@ package com.example.gunmunity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView btnSubmit;
     TextView inputEmail;
     TextView inputPassword;
+    boolean isEmailInputed = false;
+    boolean isPasswordInputed = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -39,6 +43,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mPresenter.checkAllInputed();
+            }
+        });
+
+        inputEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() != 0) {
+                    isEmailInputed = true;
+                } else {
+                    isEmailInputed = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
