@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="20dp">
+    android:paddingVertical="40dp">
 
     <ImageView
         android:id="@+id/ic_back_arrow"
