@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gunmunity.R;
-import com.example.gunmunity.model.CommunityList;
+import com.example.gunmunity.model.board.BoardInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdapter.ViewHoler> {
-    ArrayList<CommunityList> lists = new ArrayList<>();
+    ArrayList<BoardInfo> lists = new ArrayList<>();
     CommunityMainFragment mFragment;
     Context context;
 
@@ -25,7 +25,7 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
         mFragment = fragment;
     }
 
-    public void setData(List<CommunityList> lists) {
+    public void setData(List<BoardInfo> lists) {
         this.lists.addAll(lists);
         notifyDataSetChanged();
     }
@@ -40,11 +40,11 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
-        CommunityList list = lists.get(position);
+        BoardInfo list = lists.get(position);
         holder.title.setText(list.getTitle());
         holder.content.setText(list.getContent());
-        holder.time.setText(list.getTime());
-        holder.comment.setText(list.getComment());
+        holder.time.setText(list.getCreatedDate());
+        holder.comment.setText(list.getAuthor());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mFragment.goToDetailCommunity();
+                    mFragment.startDetailActivity();
                 }
             });
         }

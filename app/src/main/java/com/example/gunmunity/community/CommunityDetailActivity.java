@@ -27,10 +27,10 @@ public class CommunityDetailActivity extends AppCompatActivity implements Commun
     private void setBinding() {
         mPresenter = new CommunityDetailPresenter(this);
 
-        nickname = findViewById(R.id.detail_nickname);
-        time = findViewById(R.id.detail_time);
-        title = findViewById(R.id.detail_title);
-        content = findViewById(R.id.detail_content);
+        nickname = findViewById(R.id.community_detail_text_nickname);
+        time = findViewById(R.id.community_detail_text_time);
+        title = findViewById(R.id.community_detail_text_title);
+        content = findViewById(R.id.community_detail_text_content);
 
         mPresenter.getArticleData();
     }

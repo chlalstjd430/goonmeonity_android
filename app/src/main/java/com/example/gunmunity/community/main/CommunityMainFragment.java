@@ -6,24 +6,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gunmunity.R;
 import com.example.gunmunity.community.CommunityDetailActivity;
-import com.example.gunmunity.model.CommunityList;
+import com.example.gunmunity.community.create.CommunityCreateActivity;
+import com.example.gunmunity.model.board.BoardInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityMainFragment extends Fragment implements CommunityMainContract.View {
 
     private RecyclerView mRecyclerView;
     private CommunityMainPresenter presenter;
+    private CommunityMainAdapter adapter;
+    private ImageView buttonCreate;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -35,17 +39,23 @@ public class CommunityMainFragment extends Fragment implements CommunityMainCont
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_community_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.community_recyclerview);
-        presenter = new CommunityMainPresenter();
+        buttonCreate = rootView.findViewById(R.id.main_create);
+        presenter = new CommunityMainPresenter(this);
 
-        List<CommunityList> list = new ArrayList<>();
-        list.add(new CommunityList());
-        list.add(new CommunityList());
-        list.add(new CommunityList());
-
-        initRecyclerView(list);
+        initRecyclerView();
         setBinding(rootView);
+        setObserveLiveData();
 
         return rootView;
+    }
+
+    private void setObserveLiveData() {
+        presenter.boardList.observe(this, new Observer<List<BoardInfo>>() {
+            @Override
+            public void onChanged(List<BoardInfo> boardInfos) {
+                adapter.setData(presenter.boardList.getValue());
+            }
+        });
     }
 
     private void setBinding(View rootView) {
@@ -73,18 +83,29 @@ public class CommunityMainFragment extends Fragment implements CommunityMainCont
                 presenter.clickCategory(3);
             }
         });
+
+        buttonCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCreateActivity();
+            }
+        });
     }
 
-    private void initRecyclerView(List<CommunityList> list) {
+    private void startCreateActivity() {
+        Intent intent = new Intent(getActivity(), CommunityCreateActivity.class);
+        startActivity(intent);
+    }
+
+    private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        CommunityMainAdapter adapter = new CommunityMainAdapter(getActivity(), this);
-        adapter.setData(list);
+        adapter = new CommunityMainAdapter(getActivity(), this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    public void goToDetailCommunity() {
+    public void startDetailActivity() {
         Intent intent = new Intent(getActivity(), CommunityDetailActivity.class);
         startActivity(intent);
     }

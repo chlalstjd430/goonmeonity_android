@@ -22,7 +22,7 @@ public class GunmunityMainActivity extends AppCompatActivity {
 
     private void initView() {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_container, new CommunityMainFragment()).commit();
+                .add(R.id.main_container, new CommunityMainFragment()).addToBackStack(null).commit();
 
         bottomNavigationBar = findViewById(R.id.main_bottom_tab);
         bottomNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,24 +45,5 @@ public class GunmunityMainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-    }
-
-    private void testAPI() {
-        /*Service service = new RetrofitUtil().getService();
-        service.postJson().enqueue(new Callback<List<Result>>() {
-            @Override
-            public void onResponse(Call<List<Result>> call, Response<List<Result>> response) {
-                if (response.isSuccessful()) {
-                    List<Result> results = response.body();
-                    initRecyclerView(results);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Result>> call, Throwable t) {
-
-            }
-        });*/
     }
 }

@@ -1,4 +1,4 @@
-package com.example.gunmunity;
+package com.example.gunmunity.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

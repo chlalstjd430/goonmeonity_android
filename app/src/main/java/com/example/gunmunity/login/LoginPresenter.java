@@ -4,8 +4,10 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.gunmunity.HashingUtil;
-import com.example.gunmunity.SingleLiveEvent;
+import com.example.gunmunity.model.ConstValue;
+import com.example.gunmunity.util.HashingUtil;
+import com.example.gunmunity.util.SharedPreferenceUtil;
+import com.example.gunmunity.util.SingleLiveEvent;
 import com.example.gunmunity.model.auth.SigninRequest;
 import com.example.gunmunity.model.auth.SigninResponse;
 import com.example.gunmunity.network.AuthService;
@@ -18,7 +20,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginPresenter {
-    LoginActivity mActivity;
+    private LoginActivity mActivity;
+    private SharedPreferenceUtil mPref;
     MutableLiveData<Boolean> isEmailInputed = new MutableLiveData();
     MutableLiveData<Boolean> isPasswordInputed = new MutableLiveData();
     SingleLiveEvent<Void> loginSuccess = new SingleLiveEvent<>();
@@ -40,10 +43,15 @@ public class LoginPresenter {
                 .enqueue(new Callback<SigninResponse>() {
             @Override
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
-                Log.d("LoginActivity",response.message());
-                loginSuccess.call();
+                if (response.code()==200) {
+                    Log.d("LoginActivity",response.body().toString());
+                    mPref.setString(mActivity, ConstValue.ACCESS_TOKEN
+                            , response.body().getAccessToken().getToken());
+                    loginSuccess.call();
+                } else {
+                    Log.d("LoginActivity",response.message());
+                }
             }
-
             @Override
             public void onFailure(Call<SigninResponse> call, Throwable t) {
                 Log.d("LoginActivity",t.getLocalizedMessage());

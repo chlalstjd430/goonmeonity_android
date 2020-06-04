@@ -1,4 +1,4 @@
-package com.example.gunmunity;
+package com.example.gunmunity.util;
 
 import android.util.Log;
 
