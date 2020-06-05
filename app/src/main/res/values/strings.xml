@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gunmunity</string>
+    <string name="일">일</string>
+    <string name="입대일">입대일</string>
+    <string name="_2018_03_19">2018.03.19</string>
+    <string name="전역일">전역일</string>
 </resources>

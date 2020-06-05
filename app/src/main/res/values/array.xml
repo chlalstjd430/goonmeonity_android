@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="classification_of_service">
+        <item>간부</item>
+        <item>병사</item>
+    </string-array>
+
+    <string-array name="armyselection">
+        <item>육군</item>
+        <item>해군</item>
+        <item>공군</item>
+    </string-array>
+</resources>
