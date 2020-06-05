@@ -16,16 +16,32 @@ public class SearchBoardResponse {
         this.totalPage = totalPage;
     }
 
+    public void setBoardCount(long boardCount) {
+        this.boardCount = boardCount;
+    }
+
     public long getBoardCount() {
         return boardCount;
+    }
+
+    public void setBoardInfo(List<BoardInfo> boardInfo) {
+        this.boardInfo = boardInfo;
     }
 
     public List<BoardInfo> getBoardInfo() {
         return boardInfo;
     }
 
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
     public int getCurrentPage() {
         return currentPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
     }
 
     public int getTotalPage() {

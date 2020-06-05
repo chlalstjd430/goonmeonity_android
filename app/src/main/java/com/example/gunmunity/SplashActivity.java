@@ -32,9 +32,7 @@ public class SplashActivity extends AppCompatActivity {
 
         imageAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
+            public void onAnimationStart(Animation animation) { }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -42,15 +40,12 @@ public class SplashActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
     }
 
     public void startMainActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
-        overridePendingTransition(R.anim.splash_out_bottom, R.anim.splash_out_top);
         startActivity(intent);
         finish();
     }

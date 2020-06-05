@@ -3,7 +3,6 @@ package com.example.gunmunity.network;
 import com.example.gunmunity.model.board.BoardInfoResponse;
 import com.example.gunmunity.model.board.CreateBoardRequest;
 import com.example.gunmunity.model.board.SearchBoardResponse;
-import com.example.gunmunity.model.entity.AccessToken;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

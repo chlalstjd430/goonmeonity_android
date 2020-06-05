@@ -44,7 +44,7 @@ public class LoginPresenter {
             @Override
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 if (response.code()==200) {
-                    Log.d("LoginActivity",response.body().toString());
+                    Log.d("LoginActivity",response.body().getAccessToken().getToken());
                     mPref.setString(mActivity, ConstValue.ACCESS_TOKEN
                             , response.body().getAccessToken().getToken());
                     loginSuccess.call();

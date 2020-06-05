@@ -1,5 +1,7 @@
 package com.example.gunmunity.community.main;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.gunmunity.model.board.BoardCategory;
@@ -7,6 +9,7 @@ import com.example.gunmunity.model.board.BoardInfo;
 import com.example.gunmunity.model.board.SearchBoardResponse;
 import com.example.gunmunity.network.CommunityService;
 import com.example.gunmunity.network.RetrofitUtil;
+import com.example.gunmunity.util.SingleLiveEvent;
 
 import java.util.List;
 
@@ -23,12 +26,13 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
     String keyword;
 
     MutableLiveData<List<BoardInfo>> boardList = new MutableLiveData<>();
+    SingleLiveEvent<Void> emptyDataCall = new SingleLiveEvent<>();
 
     CommunityMainPresenter(CommunityMainFragment mFragment) {
         this.mFragment = mFragment;
         this.communityService = RetrofitUtil.getRetrofit().create(CommunityService.class);
 
-        mCategory = "";
+        mCategory = boardCategory.FREE.toString();
         currentPage = 0;
         keyword = "";
     }
@@ -55,11 +59,16 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
 
     @Override
     public void getBoardList() {
-        communityService.getBoardList(mCategory, currentPage, keyword)
+        Log.d("Mytag", mCategory);
+        communityService.getBoardList(mCategory, currentPage, null)
                 .enqueue(new Callback<SearchBoardResponse>() {
                     @Override
                     public void onResponse(Call<SearchBoardResponse> call, Response<SearchBoardResponse> response) {
-                        boardList.setValue(response.body().getBoardInfo());
+                        if (response.body().getBoardCount()==0) {
+                            emptyDataCall.call();
+                        } else {
+                            boardList.setValue(response.body().getBoardInfo());
+                        }
                     }
 
                     @Override

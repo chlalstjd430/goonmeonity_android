@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,7 @@ public class CommunityMainFragment extends Fragment implements CommunityMainCont
         initRecyclerView();
         setBinding(rootView);
         setObserveLiveData();
+        presenter.getBoardList();
 
         return rootView;
     }
@@ -54,6 +56,14 @@ public class CommunityMainFragment extends Fragment implements CommunityMainCont
             @Override
             public void onChanged(List<BoardInfo> boardInfos) {
                 adapter.setData(presenter.boardList.getValue());
+            }
+        });
+
+        presenter.emptyDataCall.observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(Void aVoid) {
+                Toast mToast = Toast.makeText(getActivity(), "데이터가 없습니다.", Toast.LENGTH_LONG);
+                mToast.show();
             }
         });
     }
