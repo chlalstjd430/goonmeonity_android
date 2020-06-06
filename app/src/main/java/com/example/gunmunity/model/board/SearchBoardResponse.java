@@ -1,35 +1,35 @@
 package com.example.gunmunity.model.board;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SearchBoardResponse {
-    private long boardCount;
-    private List<BoardInfo> boardInfo;
+    private long boardsCount;
+    private ArrayList<BoardInfo> boardsInfo;
     private int currentPage;
     private int totalPage;
 
-    public SearchBoardResponse(long boardCount, List<BoardInfo> boardInfo,
-                               int currentPage, int totalPage) {
-        this.boardCount = boardCount;
-        this.boardInfo = boardInfo;
-        this.currentPage = currentPage;
-        this.totalPage = totalPage;
+//    public SearchBoardResponse(long boardCount, List<BoardInfo> boardInfo,
+//                               int currentPage, int totalPage) {
+//        this.boardCount = boardCount;
+//        this.boardInfo = boardInfo;
+//        this.currentPage = currentPage;
+//        this.totalPage = totalPage;
+//    }
+
+    public void setBoardsCount(long boardsCount) {
+        this.boardsCount = boardsCount;
     }
 
-    public void setBoardCount(long boardCount) {
-        this.boardCount = boardCount;
+    public long getBoardsCount() {
+        return boardsCount;
     }
 
-    public long getBoardCount() {
-        return boardCount;
+    public void setBoardInfo(ArrayList<BoardInfo> boardInfo) {
+        this.boardsInfo = boardInfo;
     }
 
-    public void setBoardInfo(List<BoardInfo> boardInfo) {
-        this.boardInfo = boardInfo;
-    }
-
-    public List<BoardInfo> getBoardInfo() {
-        return boardInfo;
+    public ArrayList<BoardInfo> getBoardInfo() {
+        return boardsInfo;
     }
 
     public void setCurrentPage(int currentPage) {

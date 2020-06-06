@@ -25,8 +25,8 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
         mFragment = fragment;
     }
 
-    public void setData(List<BoardInfo> lists) {
-        this.lists.addAll(lists);
+    public void setData(ArrayList<BoardInfo> lists) {
+        this.lists = lists;
         notifyDataSetChanged();
     }
 

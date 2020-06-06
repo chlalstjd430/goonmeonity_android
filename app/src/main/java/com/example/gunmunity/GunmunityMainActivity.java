@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gunmunity.community.main.CommunityMainFragment;
+import com.example.gunmunity.discharge.dischargeFragment;
+import com.example.gunmunity.salary.saving.SavingCaculatorFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GunmunityMainActivity extends AppCompatActivity {
@@ -34,12 +36,12 @@ public class GunmunityMainActivity extends AppCompatActivity {
                                 .replace(R.id.main_container, new CommunityMainFragment()).commit();
                         break;
                     case R.id.nav_calculator:
-//                        getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.main_container, new CommunityMainFragment()).commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.main_container, new dischargeFragment()).commit();
                         break;
                     case R.id.nav_asset:
-//                        getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.main_container, new CommunityMainFragment()).commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.main_container, new SavingCaculatorFragment()).commit();
                         break;
                 }
                 return true;

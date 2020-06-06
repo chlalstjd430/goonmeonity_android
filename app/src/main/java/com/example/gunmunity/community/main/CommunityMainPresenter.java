@@ -11,7 +11,7 @@ import com.example.gunmunity.network.CommunityService;
 import com.example.gunmunity.network.RetrofitUtil;
 import com.example.gunmunity.util.SingleLiveEvent;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +25,7 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
     int currentPage;
     String keyword;
 
-    MutableLiveData<List<BoardInfo>> boardList = new MutableLiveData<>();
+    MutableLiveData<ArrayList<BoardInfo>> boardList = new MutableLiveData<>();
     SingleLiveEvent<Void> emptyDataCall = new SingleLiveEvent<>();
 
     CommunityMainPresenter(CommunityMainFragment mFragment) {
@@ -34,7 +34,7 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
 
         mCategory = boardCategory.FREE.toString();
         currentPage = 0;
-        keyword = "";
+        keyword = "123";
     }
 
     @Override
@@ -60,11 +60,11 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
     @Override
     public void getBoardList() {
         Log.d("Mytag", mCategory);
-        communityService.getBoardList(mCategory, currentPage, null)
+        communityService.getBoardList(mCategory, currentPage, keyword)
                 .enqueue(new Callback<SearchBoardResponse>() {
                     @Override
                     public void onResponse(Call<SearchBoardResponse> call, Response<SearchBoardResponse> response) {
-                        if (response.body().getBoardCount()==0) {
+                        if (response.body().getBoardsCount()==0) {
                             emptyDataCall.call();
                         } else {
                             boardList.setValue(response.body().getBoardInfo());
