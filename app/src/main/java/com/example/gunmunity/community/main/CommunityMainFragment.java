@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gunmunity.R;
-import com.example.gunmunity.community.CommunityDetailActivity;
+import com.example.gunmunity.community.detail.CommunityDetailActivity;
 import com.example.gunmunity.community.create.CommunityCreateActivity;
 import com.example.gunmunity.model.board.BoardInfo;
 
 import java.util.List;
 
-public class CommunityMainFragment extends Fragment implements CommunityMainContract.View {
+public class CommunityMainFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private CommunityMainPresenter presenter;
@@ -115,8 +115,9 @@ public class CommunityMainFragment extends Fragment implements CommunityMainCont
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    public void startDetailActivity() {
+    public void startDetailActivity(BoardInfo boardInfo) {
         Intent intent = new Intent(getActivity(), CommunityDetailActivity.class);
+        intent.putExtra("boardInfo", boardInfo);
         startActivity(intent);
     }
 

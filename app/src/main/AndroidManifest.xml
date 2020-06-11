@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".login.LoginActivity"/>
         <activity android:name=".GunmunityMainActivity"/>
-        <activity android:name=".community.CommunityDetailActivity"/>
+        <activity android:name=".community.detail.CommunityDetailActivity"/>
         <activity android:name=".login.SignupActivity"/>
         <activity android:name=".community.create.CommunityCreateActivity"/>
     </application>

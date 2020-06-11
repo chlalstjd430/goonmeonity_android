@@ -41,10 +41,7 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
         BoardInfo list = lists.get(position);
-        holder.title.setText(list.getTitle());
-        holder.content.setText(list.getContent());
-        holder.time.setText(list.getCreatedDate());
-        holder.comment.setText(list.getAuthor());
+        holder.bindHolder(list);
     }
 
     @Override
@@ -57,6 +54,7 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
         TextView content;
         TextView time;
         TextView comment;
+        BoardInfo boardInfo;
 
         public ViewHoler(@NonNull View itemView) {
             super(itemView);
@@ -69,9 +67,18 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mFragment.startDetailActivity();
+                    mFragment.startDetailActivity(boardInfo);
                 }
             });
+        }
+
+        public void bindHolder(BoardInfo boardInfo) {
+            this.boardInfo = boardInfo;
+
+            title.setText(boardInfo.getTitle());
+            content.setText(boardInfo.getContent());
+            time.setText(boardInfo.getCreatedDate());
+            comment.setText(boardInfo.getAuthor());
         }
     }
 }

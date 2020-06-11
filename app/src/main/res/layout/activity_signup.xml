@@ -63,6 +63,7 @@
         android:background="@color/colorWhite"
         android:textColor="@color/colorBlack"
         android:textSize="14dp"
+        android:inputType="textPassword"
         android:padding="12dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"

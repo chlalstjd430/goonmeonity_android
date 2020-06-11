@@ -1,7 +1,5 @@
 package com.example.gunmunity.community.create;
 
-import android.util.Log;
-
 import com.example.gunmunity.model.ConstValue;
 import com.example.gunmunity.model.board.BoardInfoResponse;
 import com.example.gunmunity.model.board.CreateBoardRequest;
@@ -29,7 +27,6 @@ public class CommunityCreatePresenter {
     }
 
     public void postArticle() {
-        Log.d("MyTag", mPref.getString(mActivity, ConstValue.ACCESS_TOKEN));
         communityService.postArticle(mPref.getString(mActivity, ConstValue.ACCESS_TOKEN), createBoardRequest)
                 .enqueue(new Callback<BoardInfoResponse>() {
                     @Override

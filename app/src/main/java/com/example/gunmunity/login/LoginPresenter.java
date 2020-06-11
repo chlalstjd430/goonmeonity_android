@@ -25,6 +25,7 @@ public class LoginPresenter {
     MutableLiveData<Boolean> isEmailInputed = new MutableLiveData();
     MutableLiveData<Boolean> isPasswordInputed = new MutableLiveData();
     SingleLiveEvent<Void> loginSuccess = new SingleLiveEvent<>();
+    SingleLiveEvent<Void> loginFailure = new SingleLiveEvent<>();
 
     private AuthService authService;
 
@@ -49,18 +50,15 @@ public class LoginPresenter {
                             , response.body().getAccessToken().getToken());
                     loginSuccess.call();
                 } else {
+                    loginFailure.call();
                     Log.d("LoginActivity",response.message());
                 }
             }
             @Override
             public void onFailure(Call<SigninResponse> call, Throwable t) {
                 Log.d("LoginActivity",t.getLocalizedMessage());
+                loginFailure.call();
             }
         });
-    }
-
-    public void iscorrectInputed() {
-        //이메일 패스워드 정규표현식으로 검사하기
-        //올바르면 이벤트 활성화
     }
 }

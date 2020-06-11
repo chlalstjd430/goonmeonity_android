@@ -1,6 +1,8 @@
 package com.example.gunmunity.model.board;
 
-public class BoardInfo {
+import java.io.Serializable;
+
+public class BoardInfo implements Serializable {
     private String author;
     private String boardCategory;
     private String content;

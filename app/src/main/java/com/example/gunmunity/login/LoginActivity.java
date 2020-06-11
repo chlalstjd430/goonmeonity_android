@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +20,15 @@ import com.example.gunmunity.R;
 import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
-    LoginPresenter mPresenter;
-    TextView btnSubmit;
-    TextView inputEmail;
-    TextView inputPassword;
-    TextView btnSignup;
+    private LoginPresenter mPresenter;
+    private TextView btnSubmit;
+    private TextView inputEmail;
+    private TextView inputPassword;
+    private TextView btnSignup;
+    private boolean emailCheck = false;
+    private boolean passwordCheck = false;
+    private boolean buttonState = false;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,21 +41,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setObserveLiveData() {
-        mPresenter.isEmailInputed.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (mPresenter.isEmailInputed.getValue()==true
-                        && mPresenter.isPasswordInputed.getValue()==true) {
-                    btnSubmit.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    btnSubmit.setTextColor(getResources().getColor(R.color.colorBlack));
-                }
-            }
-        });
-
         mPresenter.loginSuccess.observe(this, new Observer<Void>() {
             @Override
             public void onChanged(Void aVoid) {
                 startMainActivity();
+            }
+        });
+
+        mPresenter.loginFailure.observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "이메일과 패스워드를 올바르게 입력해주십시오.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -75,43 +76,31 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        inputEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void afterTextChanged(Editable s) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() != 0) {
-                    mPresenter.isEmailInputed.setValue(true);
-                } else {
-                    mPresenter.isEmailInputed.setValue(false);
-                }
-            }
-        });
+        inputEmail.addTextChangedListener(new correctInputListener(2));
 
-        inputPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void afterTextChanged(Editable s) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() != 0) {
-                    mPresenter.isPasswordInputed.setValue(true);
-                } else {
-                    mPresenter.isPasswordInputed.setValue(false);
-                }
-            }
-        });
+        inputPassword.addTextChangedListener(new correctInputListener(1));
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startSignupActivity();
+                if (buttonState) {
+                    startSignupActivity();
+                } else {
+                    Toast.makeText(getApplicationContext(), "필수 항목들을 입력해주십시오.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
+    }
+
+    private void setButtonColor() {
+        if (emailCheck == true && passwordCheck == true){
+            btnSubmit.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            btnSubmit.setTextColor(getResources().getColor(R.color.colorBlack));
+        } else {
+            btnSubmit.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+            btnSubmit.setTextColor(getResources().getColor(R.color.colorDimGrey));
+        }
     }
 
     private void startMainActivity() {
@@ -124,5 +113,45 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    class correctInputListener implements TextWatcher {
+        private int state = 0;
+
+        public correctInputListener(int state) {
+            this.state = state;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (state) {
+                case 1 :
+                    if (s.length()!=0) {
+                        emailCheck = true;
+                    } else {
+                        emailCheck = false;
+                    }
+
+                    setButtonColor();
+                    buttonState = true;
+                    break;
+                case 2 :
+                    if (s.length()!=0) {
+                        passwordCheck = true;
+                    } else {
+                        passwordCheck = false;
+                    }
+
+                    setButtonColor();
+                    buttonState = true;
+                    break;
+            }
+        }
     }
 }

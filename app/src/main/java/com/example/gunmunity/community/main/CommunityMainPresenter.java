@@ -17,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CommunityMainPresenter implements CommunityMainContract.Presenter {
+public class CommunityMainPresenter {
     private CommunityMainFragment mFragment;
     private CommunityService communityService;
     BoardCategory boardCategory;
@@ -28,7 +28,7 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
     MutableLiveData<ArrayList<BoardInfo>> boardList = new MutableLiveData<>();
     SingleLiveEvent<Void> emptyDataCall = new SingleLiveEvent<>();
 
-    CommunityMainPresenter(CommunityMainFragment mFragment) {
+    public CommunityMainPresenter(CommunityMainFragment mFragment) {
         this.mFragment = mFragment;
         this.communityService = RetrofitUtil.getRetrofit().create(CommunityService.class);
 
@@ -37,7 +37,6 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
         keyword = "123";
     }
 
-    @Override
     public void clickCategory(int viewType) {
         switch (viewType) {
             case 1 :
@@ -57,7 +56,6 @@ public class CommunityMainPresenter implements CommunityMainContract.Presenter {
         }
     }
 
-    @Override
     public void getBoardList() {
         Log.d("Mytag", mCategory);
         communityService.getBoardList(mCategory, currentPage, keyword)
