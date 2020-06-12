@@ -53,7 +53,6 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
         TextView title;
         TextView content;
         TextView time;
-        TextView comment;
         BoardInfo boardInfo;
 
         public ViewHoler(@NonNull View itemView) {
@@ -62,7 +61,6 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
             title = itemView.findViewById(R.id.item_title);
             content = itemView.findViewById(R.id.item_content);
             time = itemView.findViewById(R.id.item_time);
-            comment = itemView.findViewById(R.id.item_comment);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +76,6 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
             title.setText(boardInfo.getTitle());
             content.setText(boardInfo.getContent());
             time.setText(boardInfo.getCreatedDate());
-            comment.setText(boardInfo.getAuthor());
         }
     }
 }
