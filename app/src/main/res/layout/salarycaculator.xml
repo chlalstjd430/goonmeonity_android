@@ -3,61 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="373dp"
-    android:layout_height="560dp"
+    android:layout_height="650dp"
     android:layout_gravity="center">
-
-    <TextView
-        android:id="@+id/saving_product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="KB 장병 내일 준비 적금"
-        app:layout_constraintBottom_toTopOf="@+id/progressconstraint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="이자율 : "
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressconstraint" />
-
-    <Button
-        android:id="@+id/saving_setting"
-        android:layout_width="57dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="2dp"
-        android:text="수정"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressconstraint" />
-
-    <TextView
-        android:id="@+id/interestrate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="2.0%"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.285"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressconstraint" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/progressconstraint"
         android:layout_width="369dp"
         android:layout_height="98dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:background="#EFECEC"
         app:layout_constraintBottom_toTopOf="@+id/saving_recycler"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +22,7 @@
             android:id="@+id/endday1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="만기일"
+            android:text="@string/전역일"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +47,7 @@
         <ProgressBar
             android:id="@+id/progressBar2"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="330sp"
+            android:layout_width="330dp"
             android:layout_height="40dp"
             android:max="100"
             android:progress="70"
@@ -130,11 +83,11 @@
             app:layout_constraintVertical_bias="0.981" />
 
         <LinearLayout
-            android:id="@+id/dtext"
+            android:id="@+id/salarydtext"
 
-            android:layout_width="37dp"
+            android:layout_width="36dp"
 
-            android:layout_height="23dp"
+            android:layout_height="27dp"
             android:clickable="true"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
@@ -157,12 +110,12 @@
                 android:src="@drawable/radius_edge">
 
                 <TextView
-                    android:id="@+id/saving_remain_day"
+                    android:id="@+id/salary_remain_day"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="6sp"
                     android:foregroundGravity="center_vertical|clip_horizontal|center"
-                    android:text="D-1"
+                    android:text="D-10"
                     android:textSize="10sp" />
             </LinearLayout>
 
@@ -181,7 +134,7 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="신규일"
+            android:text="@string/전역일"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -195,20 +148,18 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="홍길동의 적금"
+        android:layout_marginTop="46dp"
+        android:text="홍길동의 월급"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/saving_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="375dp"
-        android:layout_height="344dp"
+        android:layout_width="373dp"
+        android:layout_height="443dp"
         android:background="#EFECEC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -219,7 +170,7 @@
             android:id="@+id/saving_recycle_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="거래내역 (24회차)"
+            android:text="월급내역 (24회차)"
             app:layout_constraintBottom_toTopOf="@+id/saving_recycler"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.036"
@@ -229,14 +180,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saving_recycler"
-            android:layout_width="339dp"
-            android:layout_height="302dp"
+            android:layout_width="345dp"
+            android:layout_height="383dp"
             android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.733"
             tools:itemCount="1">
 
         </androidx.recyclerview.widget.RecyclerView>

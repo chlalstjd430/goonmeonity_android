@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gunmunity.community.main.CommunityMainFragment;
 import com.example.gunmunity.discharge.dischargeFragment;
+import com.example.gunmunity.salary.SalaryFragment;
 import com.example.gunmunity.salary.saving.SavingCaculatorFragment;
+import com.example.gunmunity.salary.saving.SavingListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GunmunityMainActivity extends AppCompatActivity {
@@ -37,11 +39,11 @@ public class GunmunityMainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_calculator:
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_container, new dischargeFragment()).commit();
+                                .replace(R.id.main_container, new dischargeFragment(0)).commit();
                         break;
                     case R.id.nav_asset:
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_container, new SavingCaculatorFragment()).commit();
+                                .replace(R.id.main_container, new SalaryFragment()).commit();
                         break;
                 }
                 return true;

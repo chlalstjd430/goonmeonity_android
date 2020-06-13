@@ -2,16 +2,15 @@ package com.example.gunmunity.salary.saving;
 
 import java.util.List;
 
-public interface SavingContract {
-
+public interface SavinglistContract {
     interface View{
-        public void updateView(SavingModel model);
-        public void updateView(List<SavingCurModel> model);
+        public void updateView(List<SavinglistModel> model, int num);
     }
 
     interface Presenter {
         void setView(View view);
         void createModel();
-        int loaditem(int code);
+        int loaditem();
+        int getnamecode() throws Exception;
     }
 }

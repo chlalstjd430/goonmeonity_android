@@ -25,6 +25,7 @@ public class SavingCalculatorAdapter extends  RecyclerView.Adapter<SavingCalcula
     }
 
     public void setData(List<SavingCurModel> list) {
+        this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -38,22 +39,34 @@ public class SavingCalculatorAdapter extends  RecyclerView.Adapter<SavingCalcula
 
     @Override
     public void onBindViewHolder(@NonNull SavingCalculatorAdapter.ViewHoler holder, int position) {
-
+        SavingCurModel savingCurModel = list.get(list.size() -position-1);
+        holder.payment_date.setText(savingCurModel.getDate());
+        holder.payment_allmoney.setText(savingCurModel.getAllMoney());
+        holder.payment_money.setText(savingCurModel.getCurrentMoney());
+        holder.phase.setText(String.format("%d",list.size()-position) +"회차");
+        holder.phase_text.setText(savingCurModel.getDate().substring(0,7)+" 월분");
     }
 
     @Override
     public int getItemCount() {
-        return 30;
+        return list.size();
     }
 
     class ViewHoler extends RecyclerView.ViewHolder {
         public TextView phase;
         public TextView phase_text;
+        public TextView payment_date;
+        public TextView payment_money;
+        public TextView payment_allmoney;
 
         public ViewHoler(@NonNull View itemView) {
             super(itemView);
-            //phase = itemView.findViewById(R.id.phase);
-            // phase = itemView.findViewById(R.id.phase_text);
+            phase = itemView.findViewById(R.id.phase);
+            phase_text = itemView.findViewById(R.id.phase_text);
+            payment_allmoney = itemView.findViewById(R.id.payment_allmoney);
+            payment_date = itemView.findViewById(R.id.payment_date);
+            payment_money = itemView.findViewById(R.id.payment_money);
+
         }
     }
 }

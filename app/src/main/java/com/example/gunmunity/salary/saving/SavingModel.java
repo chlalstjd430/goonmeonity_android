@@ -7,6 +7,7 @@ public class SavingModel {
     String SavingNmae;
     String InterestRate;
     String RemainDate;
+    String allday;
 
     //Getter
     public String getNewDate() {
@@ -33,6 +34,10 @@ public class SavingModel {
         return RemainDate;
     }
 
+    public String getAllday() {
+        return allday;
+    }
+
     //Setter
     public void setNewDate(String newDate) {
         this.newDate = newDate;
@@ -56,5 +61,9 @@ public class SavingModel {
 
     public void setRemainDate(String remainDate) {
         RemainDate = remainDate;
+    }
+
+    public void setAllday(String allday) {
+        this.allday = allday;
     }
 }

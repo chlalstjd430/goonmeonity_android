@@ -7,7 +7,7 @@ public class DischargeModel {
     String remain_text2;
     String DischargeDay;
     String curclass;
-    String specialist;
+    String percentage;
     String EnlistmentDay;
     String _dischargeDay;
     String Nickname;
@@ -15,6 +15,13 @@ public class DischargeModel {
     String service_text;
     String remain_service_text;
     String promotion_text;
+    String dischargDate;
+
+    int _1per;
+    int _2per;
+    int _3per;
+    int cardre;
+    int army;
 
     //getter
     public String get_dischargeDay() {
@@ -23,6 +30,10 @@ public class DischargeModel {
 
     public String getMon_text1() {
         return mon_text1;
+    }
+
+    public String getDischargDate() {
+        return dischargDate;
     }
 
     public String getMon_text2() {
@@ -65,12 +76,32 @@ public class DischargeModel {
         return curclass;
     }
 
-    public String getSpecialist() {
-        return specialist;
+    public String getPercentage() {
+        return percentage;
     }
 
     public String getEnlistmentDay() {
         return EnlistmentDay;
+    }
+
+    public int getCardre() {
+        return cardre;
+    }
+
+    public int get_1per() {
+        return _1per;
+    }
+
+    public int get_2per() {
+        return _2per;
+    }
+
+    public int get_3per() {
+        return _3per;
+    }
+
+    public int getArmy() {
+        return army;
     }
 
     //setter
@@ -123,11 +154,35 @@ public class DischargeModel {
         this.curclass = curclass;
     }
 
-    public void setSpecialist(String specialist) {
-        this.specialist = specialist;
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
     }
 
     public void setEnlistmentDay(String enlistmentDay) {
         EnlistmentDay = enlistmentDay;
+    }
+
+    public void setCardre(int cardre) {
+        this.cardre = cardre;
+    }
+
+    public void set_1per(int _1per) {
+        this._1per = _1per;
+    }
+
+    public void set_2per(int _2per) {
+        this._2per = _2per;
+    }
+
+    public void set_3per(int _3per) {
+        this._3per = _3per;
+    }
+
+    public void setArmy(int army) {
+        this.army = army;
+    }
+
+    public void setDischargDate(String dischargDate) {
+        this.dischargDate = dischargDate;
     }
 }
