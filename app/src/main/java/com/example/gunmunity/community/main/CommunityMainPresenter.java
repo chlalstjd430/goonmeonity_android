@@ -34,7 +34,7 @@ public class CommunityMainPresenter {
 
         mCategory = boardCategory.FREE.toString();
         currentPage = 0;
-        keyword = "123";
+        //keyword = "";
     }
 
     public void clickCategory(int viewType) {
@@ -58,7 +58,7 @@ public class CommunityMainPresenter {
 
     public void getBoardList() {
         Log.d("Mytag", mCategory);
-        communityService.getBoardList(mCategory, currentPage, keyword)
+        communityService.getBoardList(mCategory, currentPage)
                 .enqueue(new Callback<SearchBoardResponse>() {
                     @Override
                     public void onResponse(Call<SearchBoardResponse> call, Response<SearchBoardResponse> response) {

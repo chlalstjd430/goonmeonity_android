@@ -14,8 +14,7 @@ import retrofit2.http.Query;
 public interface CommunityService {
     @GET("/v1/boards")
     Call<SearchBoardResponse> getBoardList(@Query("boardCategory") String boardCategory,
-                                           @Query("currentPage") int currentPage,
-                                           @Query("keyword") String keyword);
+                                           @Query("currentPage") int currentPage);
 
     @POST("/v1/boards/board")
     Call<BoardInfoResponse> postArticle(@Header("accessToken")String accessToken,
