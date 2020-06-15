@@ -29,6 +29,7 @@
         <activity android:name=".community.detail.CommunityDetailActivity"/>
         <activity android:name=".login.SignupActivity"/>
         <activity android:name=".community.create.CommunityCreateActivity"/>
+        <activity android:name=".salary.saving.SavingCaculatorSettingActivity"/>
     </application>
 
 </manifest>

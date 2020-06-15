@@ -12,6 +12,7 @@ public class SharedPreferenceUtil {
     private static final long DEFAULT_VALUE_LONG = -1L;
 
     private static SharedPreferences getPreferences(Context context) {
+        System.out.println(context);
         return context.getSharedPreferences(PREFERENCE_NAME, 0);
     }
 

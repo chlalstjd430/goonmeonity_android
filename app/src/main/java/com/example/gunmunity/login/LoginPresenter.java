@@ -48,6 +48,8 @@ public class LoginPresenter {
                     Log.d("LoginActivity",response.body().getAccessToken().getToken());
                     mPref.setString(mActivity, ConstValue.ACCESS_TOKEN
                             , response.body().getAccessToken().getToken());
+                    mPref.setString(mActivity, ConstValue.USERID
+                            , response.body().getUserInfo().getId());
                     loginSuccess.call();
                 } else {
                     loginFailure.call();

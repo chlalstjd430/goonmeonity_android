@@ -66,7 +66,7 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
                 }
             });
         }
-
+      
         private ArrayList<String> tokenCreatedDate(String time) {
             StringTokenizer stringTokenizer = new StringTokenizer(time, "T");
             ArrayList<String> tokendStr = new ArrayList<>();

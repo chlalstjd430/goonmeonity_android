@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/progress"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintHorizontal_bias="0">
+
+    <ScrollView
+        android:id="@+id/back"
+        android:layout_width="373dp"
+        android:layout_height="560dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/mon_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/edge"
+                android:text="0"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/disCharge"
+                app:layout_constraintEnd_toStartOf="@+id/month"
+                app:layout_constraintHorizontal_bias="0.875"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/mon_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/edge"
+                android:text="5"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/month"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/mon_text1"
+                app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+            <TextView
+                android:id="@+id/remain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남음"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.228"
+                app:layout_constraintStart_toEndOf="@+id/remain_text"
+                app:layout_constraintTop_toBottomOf="@+id/Title"
+                app:layout_constraintVertical_bias="0.22" />
+
+            <TextView
+                android:id="@+id/Enlistment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/입대일"
+                app:layout_constraintBottom_toTopOf="@+id/EnlistmentDay1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/EnlistmentDay1"
+                android:layout_width="84dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="24dp"
+                android:text="2018.03.19"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dischargeDay"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/discharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/전역일"
+                app:layout_constraintBottom_toTopOf="@+id/dischargeDay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.966"
+                app:layout_constraintStart_toEndOf="@+id/Enlistment"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/dischargeDay"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:text="2019.11.16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.967"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="0.02" />
+
+            <TextView
+                android:id="@+id/remain_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/edge"
+                android:text="5"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/remain_text"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+            <TextView
+                android:id="@+id/DischargeDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/radius_edge"
+                android:paddingStart="3sp"
+                android:paddingLeft="3sp"
+                android:paddingEnd="3sp"
+                android:paddingRight="3sp"
+                android:text="2020년 11월 16일"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toEndOf="@+id/disCharge"
+                app:layout_constraintTop_toBottomOf="@+id/mon_text1"
+                app:layout_constraintVertical_bias="0.916" />
+
+            <TextView
+                android:id="@+id/disCharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="전역"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/month"
+                app:layout_constraintVertical_bias="0.954" />
+
+            <TextView
+                android:id="@+id/remain_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="136dp"
+                android:text="@string/일"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/DischargeDay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.66"
+                app:layout_constraintStart_toEndOf="@+id/month"
+                app:layout_constraintTop_toBottomOf="@+id/Title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/remain_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/edge"
+                android:text="0"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/DischargeDay"
+                app:layout_constraintEnd_toStartOf="@+id/remain_text2"
+                app:layout_constraintHorizontal_bias="0.914"
+                app:layout_constraintStart_toEndOf="@+id/month"
+                app:layout_constraintTop_toBottomOf="@+id/Title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="개월"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.402"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="356dp"
+                android:layout_height="61dp"
+                android:layout_marginTop="128dp"
+                android:max="100"
+                android:progress="70"
+                android:progressDrawable="@drawable/progressbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Title" />
+
+            <TextView
+                android:id="@+id/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="군머니티 전역일 계산기"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60.33333%"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+            <TextView
+                android:id="@+id/Nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1096dp"
+                android:text="홍길동"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/radius_edge"
+                android:paddingStart="3sp"
+                android:paddingLeft="3sp"
+                android:paddingEnd="3sp"
+                android:text="현재 복무일"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.226"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Nickname" />
+
+            <TextView
+                android:id="@+id/service_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="5xx일"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.554"
+                app:layout_constraintStart_toEndOf="@+id/service"
+                app:layout_constraintTop_toBottomOf="@+id/Nickname" />
+
+            <TextView
+                android:id="@+id/remain_service_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="1xx일"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.56"
+                app:layout_constraintStart_toEndOf="@+id/remain_service"
+                app:layout_constraintTop_toBottomOf="@+id/service_text" />
+
+            <TextView
+                android:id="@+id/remain_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/radius_edge"
+                android:paddingStart="3sp"
+                android:paddingEnd="3sp"
+                android:paddingRight="3sp"
+                android:text="남은 복무일"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.228"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service" />
+
+            <Spinner
+                android:id="@+id/classselection"
+                android:layout_width="140dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="92dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/remain_service" />
+
+            <Spinner
+                android:id="@+id/armyselection"
+                android:layout_width="104dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="136dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.091"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/remain_service" />
+
+            <EditText
+                android:id="@+id/enli_day_edit"
+                android:layout_width="104dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="136dp"
+                android:ems="10"
+                android:hint="입대일 ex)20191010"
+                android:inputType="number"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.486"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/remain_service" />
+
+            <EditText
+                android:id="@+id/discharge_edit"
+                android:layout_width="104dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="136dp"
+                android:ems="10"
+                android:hint="전역일 ex)20191010"
+                android:inputType="number"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.892"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/remain_service" />
+
+            <Button
+                android:id="@+id/apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="저장"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/armyselection" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
