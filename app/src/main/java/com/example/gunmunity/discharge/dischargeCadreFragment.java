@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.gunmunity.R;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class dischargeCadreFragment extends Fragment implements DischargeContract.View{
 
@@ -28,7 +29,6 @@ public class dischargeCadreFragment extends Fragment implements DischargeContrac
 
     public dischargeCadreFragment(int i) {
         presenter = new DischargePresenter();
-        presenter.setView(this);
         this.flag = i;
     }
 
@@ -51,7 +51,7 @@ public class dischargeCadreFragment extends Fragment implements DischargeContrac
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 if(position == 0){
-                    getFragmentManager().beginTransaction().replace(R.id.discharge,new dischargeFragment(1)).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.main_container,new dischargeFragment(1)).commit();
                 }
             }
 
@@ -66,11 +66,16 @@ public class dischargeCadreFragment extends Fragment implements DischargeContrac
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        presenter.setView(this);
         view = inflater.inflate(R.layout.discharge_cadre_fragment,container,false);
         presenter.createModel();
         if(flag != 1){
-            if(presenter.cadre_loaditem() == 1){
-                getFragmentManager().beginTransaction().replace(R.id.main_container,new dischargeCadreFragment(0)).commit();
+            try {
+                if(presenter.cadre_loaditem() == 1){
+                    getFragmentManager().beginTransaction().replace(R.id.main_container,new dischargeCadreFragment(0)).commit();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
 
@@ -102,7 +107,7 @@ public class dischargeCadreFragment extends Fragment implements DischargeContrac
                     if(presenter.cadre_loaditem() == 1){
                         getFragmentManager().beginTransaction().replace(R.id.main_container,new dischargeCadreFragment(0)).commit();
                     }
-                } catch (IOException e) {
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
             }

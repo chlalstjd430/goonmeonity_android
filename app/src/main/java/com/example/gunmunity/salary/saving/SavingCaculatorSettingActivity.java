@@ -203,6 +203,7 @@ public class SavingCaculatorSettingActivity extends AppCompatActivity {
 
 
         wbuf.println(edit_tile.getText().toString());
+        Log.d("test",""+Util.total_money(cnewdate,cenddate,Icycle,Imoney));
         wbuf.println(Util.total_money(cnewdate,cenddate,Icycle,Imoney));
         wbuf.println(edit_interestrate.getText().toString());
         wbuf.println(money.getText().toString());

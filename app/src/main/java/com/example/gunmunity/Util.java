@@ -15,13 +15,11 @@ public class Util {
 
         int CurMonth = cur.get(Calendar.MONTH);
 
-        if(CurMonth <= newdate.get(Calendar.MONTH) && newdate.get(Calendar.YEAR) < cur.get(Calendar.YEAR)){
-            CurMonth += 12;
-        }
+        CurMonth += 12 * (cur.get(Calendar.YEAR) - newdate.get(Calendar.YEAR));
 
         int sub = CurMonth - newdate.get(Calendar.MONTH);
-        if(cycle < cur.get(Calendar.DATE))
-            sub += (cur.get(Calendar.YEAR) - newdate.get(Calendar.YEAR) - 1) * 12;
+        if(cycle <= cur.get(Calendar.DATE))
+            sub++;
         Allmoney = sub * money;
         return Allmoney;
     }

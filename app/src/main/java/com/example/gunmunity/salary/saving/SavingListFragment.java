@@ -2,6 +2,7 @@ package com.example.gunmunity.salary.saving;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,6 +48,7 @@ public class SavingListFragment extends Fragment implements SavinglistContract.V
 
     private void settingbutton() {
         Button create_button = view.findViewById(R.id.create_saving_button);
+        Button remove_button = view.findViewById(R.id.remove_saving_button);
         create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +68,25 @@ public class SavingListFragment extends Fragment implements SavinglistContract.V
 
             }
         });
+
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConstraintLayout layout = view.findViewById(R.id.constraintLayout2);
+
+                if(adapter.getRemove_flag() == 0) {
+                    Log.d("test","flagon");
+                    layout.setBackgroundColor(Color.rgb(46,44,44));
+                    adapter.setRemove_flag(1);
+                }
+                else if(adapter.getRemove_flag() == 1){
+                    Log.d("test","flagoff");
+                    layout.setBackgroundColor(Color.rgb(239,236,236));
+                    adapter.setRemove_flag(0);
+                }
+            }
+        });
+
     }
 
     private void initRecyclerView() {
@@ -83,6 +105,11 @@ public class SavingListFragment extends Fragment implements SavinglistContract.V
         adapter.setData(model);
         TextView saving_recycle_title = view.findViewById(R.id.saving_recycle_title);
         saving_recycle_title.setText("적금개수 ("+num +"개)");
+    }
+
+    public void request_remove(int code){
+        presenter.removeitem(code);
+        presenter.loaditem();
     }
 
 }

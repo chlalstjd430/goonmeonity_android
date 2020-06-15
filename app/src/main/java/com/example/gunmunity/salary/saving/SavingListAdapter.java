@@ -21,7 +21,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class SavingListAdapter extends  RecyclerView.Adapter<SavingListAdapter.ViewHoler>  {
     Context context;
     Fragment view;
+    int remove_flag = 0;
     private List<SavinglistModel> list = new ArrayList<SavinglistModel>();
+
+    public void setRemove_flag(int i){
+        this.remove_flag = i;
+    }
+
+    public int getRemove_flag(){return this.remove_flag;}
 
     public SavingListAdapter(Context context, Fragment view) {
         this.context = context;
@@ -49,7 +56,12 @@ public class SavingListAdapter extends  RecyclerView.Adapter<SavingListAdapter.V
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view.getFragmentManager().beginTransaction().replace(R.id.main_container,new SavingCaculatorFragment(model.getCode())).commit();
+                if(remove_flag == 0)
+                    view.getFragmentManager().beginTransaction().replace(R.id.main_container,new SavingCaculatorFragment(model.getCode())).commit();
+                else if(remove_flag == 1){
+                    ((SavingListFragment)view).request_remove(model.getCode());
+                }
+
             }
         });
     }

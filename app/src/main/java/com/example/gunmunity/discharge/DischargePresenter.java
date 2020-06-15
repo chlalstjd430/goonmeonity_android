@@ -1,10 +1,17 @@
 package com.example.gunmunity.discharge;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.gunmunity.model.ConstValue;
+import com.example.gunmunity.model.discharge.DischargeResponse;
+import com.example.gunmunity.network.DischargeService;
+import com.example.gunmunity.network.RetrofitUtil;
+import com.example.gunmunity.util.SharedPreferenceUtil;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -19,14 +26,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DischargePresenter implements DischargeContract.Presenter {
 
     private DischargeContract.View view;
     private DischargeModel model;
+    private DischargeService service;
+    private SharedPreferenceUtil mPref;
+    Context mActivity;
+
+    public DischargePresenter(){
+        this.service = RetrofitUtil.getRetrofit().create(DischargeService.class);
+    }
 
     @Override
     public void setView(DischargeContract.View view) {
         this.view = view;
+        mActivity = ((Fragment)view).getContext();
     }
 
     @Override
@@ -35,11 +54,13 @@ public class DischargePresenter implements DischargeContract.Presenter {
     }
 
     @Override
-    public int cadre_loaditem() {
+    public int cadre_loaditem(){
+
         try {
             return cadre_load_data();
         } catch (Exception e) {
-            e.printStackTrace();
+            getdischarge();
+            //e.printStackTrace();
             return -1;
         }
     }
@@ -95,9 +116,7 @@ public class DischargePresenter implements DischargeContract.Presenter {
             dif_day += cur.getActualMaximum(Calendar.DAY_OF_MONTH);
         }
 
-        if(dif_month < 0) {
-            dif_month += 12 * (cal_discharge.get(Calendar.YEAR) - cur.get(Calendar.YEAR));
-        }
+        dif_month += 12 * (cal_discharge.get(Calendar.YEAR) - cur.get(Calendar.YEAR));
 
         model.setMon_text1(""+String.format("%02d",dif_month).substring(0,1));
         model.setMon_text2(""+String.format("%02d",dif_month).substring(1));
@@ -120,7 +139,9 @@ public class DischargePresenter implements DischargeContract.Presenter {
         try {
             return load_data();
         } catch (Exception e) {
-            e.printStackTrace();
+
+            getdischarge();
+            //de.printStackTrace();
             return -1;
         }
     }
@@ -146,6 +167,7 @@ public class DischargePresenter implements DischargeContract.Presenter {
         buf.println(""+data.getEndlidate());
         buf.close();
         fos.close();
+        adddischarge("19000101",data.getEndlidate(),data.getArmy(),data.get_class());
         return 0;
     }
 
@@ -195,6 +217,7 @@ public class DischargePresenter implements DischargeContract.Presenter {
         buf.println(""+data.getDischargedate());
         buf.close();
         fos.close();
+        adddischarge(data.getDischargedate(),data.getEndlidate(),data.getArmy(),data.get_class());
         return 0;
     }
 
@@ -235,7 +258,6 @@ public class DischargePresenter implements DischargeContract.Presenter {
     }
 
     private void Setting_data(String[] data) throws ParseException {
-        String[] discharge_day = new String[3];
         final String[] class_flag = {"이병","일병","상병","병장"};
         String _class_text = null;
         String remain_class = null;
@@ -255,6 +277,7 @@ public class DischargePresenter implements DischargeContract.Presenter {
 
         switch(data[1]){
             case "0":
+            case "1":
                 cal_discharge.add(Calendar.MONTH, 21);
                 cal_discharge.add(Calendar.DATE, -1);
                 _class[1].add(Calendar.MONTH, 2);
@@ -264,17 +287,25 @@ public class DischargePresenter implements DischargeContract.Presenter {
                 _class[3].add(Calendar.MONTH, 14);
                 _class[3].set(Calendar.DATE, 1);
                 break;
-            case "1":
-                cal_discharge.add(Calendar.MONTH, 21);
-                cal_discharge.add(Calendar.DATE, -1);
-                break;
             case "2":
                 cal_discharge.add(Calendar.MONTH, 23);
                 cal_discharge.add(Calendar.DATE, -1);
+                _class[1].add(Calendar.MONTH, 2);
+                _class[1].set(Calendar.DATE, 1);
+                _class[2].add(Calendar.MONTH, 8);
+                _class[2].set(Calendar.DATE, 1);
+                _class[3].add(Calendar.MONTH, 14);
+                _class[3].set(Calendar.DATE, 1);
                 break;
             case "3":
                 cal_discharge.add(Calendar.MONTH, 24);
                 cal_discharge.add(Calendar.DATE, -1);
+                _class[1].add(Calendar.MONTH, 2);
+                _class[1].set(Calendar.DATE, 1);
+                _class[2].add(Calendar.MONTH, 8);
+                _class[2].set(Calendar.DATE, 1);
+                _class[3].add(Calendar.MONTH, 14);
+                _class[3].set(Calendar.DATE, 1);
                 break;
         }
         Date dischrage = cal_discharge.getTime();
@@ -306,9 +337,7 @@ public class DischargePresenter implements DischargeContract.Presenter {
             dif_day += cur.getActualMaximum(Calendar.DAY_OF_MONTH);
         }
 
-        if(dif_month < 0) {
-            dif_month += 12;
-        }
+        dif_month += 12 * (cal_discharge.get(Calendar.YEAR) - cur.get(Calendar.YEAR));
 
         for(int i=2;i<5;i++) {
 
@@ -346,5 +375,96 @@ public class DischargePresenter implements DischargeContract.Presenter {
         model.set_3per((int) (((_class[3].getTime().getTime() - enli.getTime())/(24*60*60*1000)/(double)allday) * 100));
         model.setCardre(Integer.parseInt(data[0]));
         model.setArmy(Integer.parseInt(data[1]));
+    }
+
+    public void getdischarge() {
+
+        service.getdischarge(mPref.getString(mActivity, ConstValue.ACCESS_TOKEN),Integer.parseInt(mPref.getString(mActivity, ConstValue.USERID)))
+                .enqueue(new Callback<DischargeResponse>() {
+                    @Override
+                    public void onResponse(Call<DischargeResponse> call, Response<DischargeResponse> response) {
+                        String[] data = new String[4];
+                        Log.d("test",response.toString());
+
+                        switch(response.body().getMilitaryAffiliate()){
+                            case "MILITARY_SERVICE":
+                                data[1] = "0";
+                                break;
+                            case "SENIOR_SERVICE":
+                                data[1] = "2";
+                                break;
+                            case "AIR_FORCE":
+                                data[1] = "3";
+                                break;
+                        }
+                        data[2] = response.body().getEnlistmentDate();
+                        if(response.body().getMilitaryStatus().equals("OFFICER")){
+                            data[0] = "1";
+                            data[3] = response.body().getDischargeDate();
+                            try {
+                                cadre_Setting_data(data);
+                                view.updateView(model);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else{
+                            data[0] = "0";
+                            data[3] = "";
+                            try {
+                                Setting_data(data);
+                                view.updateView(model);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<DischargeResponse> call, Throwable t) {
+                    }
+                });
+    }
+
+
+    private void adddischarge(String dischargedate, String endlidate, int army, int aClass) {
+        String aff;
+        String status;
+        switch (army){
+            case 0:
+            case 1:
+                aff = "MILITARY_SERVICE";
+                break;
+            case 2:
+                aff = "SENIOR_SERVICE";
+                break;
+            case 3:
+                aff = "AIR_FORCE";
+                break;
+            default:
+                aff = null;
+        }
+        switch (aClass){
+            case 0:
+                status = "SOLDIER";
+                break;
+            case 1:
+                status = "OFFICER";
+                break;
+            default:
+                status = null;
+        }
+        service.adddischarge(mPref.getString(mActivity, ConstValue.ACCESS_TOKEN),Integer.parseInt(mPref.getString(mActivity, ConstValue.USERID)),dischargedate,endlidate,aff,status)
+                .enqueue(new Callback<DischargeResponse>() {
+                    @Override
+                    public void onResponse(Call<DischargeResponse> call, Response<DischargeResponse> response) {
+
+                    }
+                    @Override
+                    public void onFailure(Call<DischargeResponse> call, Throwable t) {
+
+                    }
+                });
     }
 }

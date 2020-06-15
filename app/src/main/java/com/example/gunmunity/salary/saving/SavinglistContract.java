@@ -12,5 +12,6 @@ public interface SavinglistContract {
         void createModel();
         int loaditem();
         int getnamecode() throws Exception;
+        int removeitem(int code);
     }
 }

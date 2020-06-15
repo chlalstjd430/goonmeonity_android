@@ -43,7 +43,7 @@ public class GunmunityMainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_asset:
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_container, new SalaryFragment()).commit();
+                                .replace(R.id.main_container, new SavingListFragment()).commit();
                         break;
                 }
                 return true;

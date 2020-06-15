@@ -1,6 +1,7 @@
 package com.example.gunmunity.discharge;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ public class dischargeFragment extends Fragment implements DischargeContract.Vie
 
     public dischargeFragment(int i) {
         presenter = new DischargePresenter();
-        presenter.setView(this);
         this.flag = i;
     }
 
@@ -69,12 +69,12 @@ public class dischargeFragment extends Fragment implements DischargeContract.Vie
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.discharge_fragment,container,false);
+        presenter.setView(this);
         presenter.createModel();
         if(flag != 1){
             if(presenter.loaditem() == 1){
-                getFragmentManager().beginTransaction().replace(R.id.discharge,new dischargeCadreFragment(0)).commit();
+                getFragmentManager().beginTransaction().replace(R.id.main_container,new dischargeCadreFragment(0)).commit();
             }
         }
         setspinner();

@@ -115,6 +115,14 @@ public class SavinglistPresenter implements SavinglistContract.Presenter {
         return i;
     }
 
+    @Override
+    public int removeitem(int code) {
+        File directory = ((Fragment)view).getContext().getFileStreamPath("saving");
+        File file = new File(directory.getAbsolutePath() +"/"+code+".dat");
+        file.delete();
+        return 0;
+    }
+
     private List<String>  FileList(String strFolderName)
     {
 
