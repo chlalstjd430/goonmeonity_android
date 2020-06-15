@@ -1,27 +1,24 @@
 package com.example.gunmunity.community.main;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gunmunity.R;
+import com.example.gunmunity.databinding.ItemCommunityBinding;
 import com.example.gunmunity.model.board.BoardInfo;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.StringTokenizer;
 
-public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdapter.ViewHoler> {
+public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdapter.ViewHolder> {
     ArrayList<BoardInfo> lists = new ArrayList<>();
     CommunityMainFragment mFragment;
-    Context context;
+    ItemCommunityBinding binding;
 
-    public CommunityMainAdapter(Context context, CommunityMainFragment fragment) {
-        this.context = context;
+    public CommunityMainAdapter(CommunityMainFragment fragment) {
         mFragment = fragment;
     }
 
@@ -32,14 +29,15 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
 
     @NonNull
     @Override
-    public ViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_community, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        binding = ItemCommunityBinding.inflate(
+                LayoutInflater.from(parent.getContext()), parent, false);
 
-        return new ViewHoler(view);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BoardInfo list = lists.get(position);
         holder.bindHolder(list);
     }
@@ -49,20 +47,19 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
         return lists != null ? lists.size() : 0;
     }
 
-    class ViewHoler extends RecyclerView.ViewHolder {
-        TextView title;
-        TextView content;
-        TextView time;
-        BoardInfo boardInfo;
+    class ViewHolder extends RecyclerView.ViewHolder {
+    ItemCommunityBinding binding;
 
-        public ViewHoler(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(ItemCommunityBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
 
-            title = itemView.findViewById(R.id.item_title);
-            content = itemView.findViewById(R.id.item_content);
-            time = itemView.findViewById(R.id.item_time);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+        public void bindHolder(final BoardInfo boardInfo) {
+            binding.setBoardInfo(boardInfo);
+            ArrayList<String> tokenedStr = tokenCreatedDate(boardInfo.getCreatedDate());
+            binding.itemTime.setText(tokenedStr.get(0) + "\n" + tokenedStr.get(1));
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mFragment.startDetailActivity(boardInfo);
@@ -70,12 +67,13 @@ public class CommunityMainAdapter extends RecyclerView.Adapter<CommunityMainAdap
             });
         }
 
-        public void bindHolder(BoardInfo boardInfo) {
-            this.boardInfo = boardInfo;
+        private ArrayList<String> tokenCreatedDate(String time) {
+            StringTokenizer stringTokenizer = new StringTokenizer(time, "T");
+            ArrayList<String> tokendStr = new ArrayList<>();
+            tokendStr.add(stringTokenizer.nextToken());
+            tokendStr.add(stringTokenizer.nextToken());
 
-            title.setText(boardInfo.getTitle());
-            content.setText(boardInfo.getContent());
-            time.setText(boardInfo.getCreatedDate());
+            return tokendStr;
         }
     }
 }

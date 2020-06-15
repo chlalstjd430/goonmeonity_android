@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,10 @@ public class CommunityMainFragment extends Fragment {
     private CommunityMainPresenter presenter;
     private CommunityMainAdapter adapter;
     private ImageView buttonCreate;
+    private Button category1;
+    private Button category2;
+    private Button category3;
+    private Button category4;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -69,14 +75,23 @@ public class CommunityMainFragment extends Fragment {
     }
 
     private void setBinding(View rootView) {
-        View category1 = rootView.findViewById(R.id.main_category1);
-        View category2 = rootView.findViewById(R.id.main_category2);
-        View category3 = rootView.findViewById(R.id.main_category3);
+        category1 = rootView.findViewById(R.id.main_category1);
+        category2 = rootView.findViewById(R.id.main_category2);
+        category3 = rootView.findViewById(R.id.main_category3);
+        category4 = rootView.findViewById(R.id.main_category4);
 
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.clickCategory(1);
+                category1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                category1.setTextColor(getResources().getColor(R.color.colorWhite));
+                category2.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category2.setTextColor(getResources().getColor(R.color.colorBlack));
+                category3.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category3.setTextColor(getResources().getColor(R.color.colorBlack));
+                category4.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category4.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
 
@@ -84,6 +99,14 @@ public class CommunityMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 presenter.clickCategory(2);
+                category2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                category2.setTextColor(getResources().getColor(R.color.colorWhite));
+                category1.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category1.setTextColor(getResources().getColor(R.color.colorBlack));
+                category3.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category3.setTextColor(getResources().getColor(R.color.colorBlack));
+                category4.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category4.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
 
@@ -91,6 +114,14 @@ public class CommunityMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 presenter.clickCategory(3);
+                category3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                category3.setTextColor(getResources().getColor(R.color.colorWhite));
+                category2.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category2.setTextColor(getResources().getColor(R.color.colorBlack));
+                category1.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category1.setTextColor(getResources().getColor(R.color.colorBlack));
+                category4.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category4.setTextColor(getResources().getColor(R.color.colorBlack));
             }
         });
 
@@ -110,7 +141,7 @@ public class CommunityMainFragment extends Fragment {
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapter = new CommunityMainAdapter(getActivity(), this);
+        adapter = new CommunityMainAdapter(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }

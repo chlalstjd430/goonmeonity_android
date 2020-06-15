@@ -68,10 +68,14 @@ public class LoginActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    mPresenter.isRegisteredUser(inputEmail.getText().toString(), inputPassword.getText().toString());
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
+                if (buttonState) {
+                    try {
+                        mPresenter.isRegisteredUser(inputEmail.getText().toString(), inputPassword.getText().toString());
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "필수 항목들을 입력해주십시오.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -83,11 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (buttonState) {
-                    startSignupActivity();
-                } else {
-                    Toast.makeText(getApplicationContext(), "필수 항목들을 입력해주십시오.", Toast.LENGTH_LONG).show();
-                }
+                startSignupActivity();
             }
         });
 
@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
     private void startSignupActivity() {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
-        finish();
     }
 
     class correctInputListener implements TextWatcher {

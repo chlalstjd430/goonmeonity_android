@@ -19,4 +19,9 @@
         android:icon="@drawable/ic_money"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/nav_salary"
+        android:title="Salary"
+        android:icon="@drawable/ic_attach_money_black_24dp"
+        app:showAsAction="ifRoom"/>
 </menu>
