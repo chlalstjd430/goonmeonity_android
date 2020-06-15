@@ -384,38 +384,39 @@ public class DischargePresenter implements DischargeContract.Presenter {
                     @Override
                     public void onResponse(Call<DischargeResponse> call, Response<DischargeResponse> response) {
                         String[] data = new String[4];
-                        Log.d("test",response.toString());
-
-                        switch(response.body().getMilitaryAffiliate()){
-                            case "MILITARY_SERVICE":
-                                data[1] = "0";
-                                break;
-                            case "SENIOR_SERVICE":
-                                data[1] = "2";
-                                break;
-                            case "AIR_FORCE":
-                                data[1] = "3";
-                                break;
-                        }
-                        data[2] = response.body().getEnlistmentDate();
-                        if(response.body().getMilitaryStatus().equals("OFFICER")){
-                            data[0] = "1";
-                            data[3] = response.body().getDischargeDate();
-                            try {
-                                cadre_Setting_data(data);
-                                view.updateView(model);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                        Log.d("test",""+response.code());
+                        if(response.code() == 200){
+                            switch(response.body().getMilitaryAffiliate()){
+                                case "MILITARY_SERVICE":
+                                    data[1] = "0";
+                                    break;
+                                case "SENIOR_SERVICE":
+                                    data[1] = "2";
+                                    break;
+                                case "AIR_FORCE":
+                                    data[1] = "3";
+                                    break;
                             }
-                        }
-                        else{
-                            data[0] = "0";
-                            data[3] = "";
-                            try {
-                                Setting_data(data);
-                                view.updateView(model);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                            data[2] = response.body().getEnlistmentDate();
+                            if(response.body().getMilitaryStatus().equals("OFFICER")){
+                                data[0] = "1";
+                                data[3] = response.body().getDischargeDate();
+                                try {
+                                    cadre_Setting_data(data);
+                                    view.updateView(model);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else{
+                                data[0] = "0";
+                                data[3] = "";
+                                try {
+                                    Setting_data(data);
+                                    view.updateView(model);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
 
