@@ -157,44 +157,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
-    class correctInputListener implements TextWatcher {
-        private int state = 0;
-
-        public correctInputListener(int state) {
-            this.state = state;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) { }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            switch (state) {
-                case 1 :
-                    if (s.length()!=0) {
-                        emailCheck = true;
-                    } else {
-                        emailCheck = false;
-                    }
-
-                    setButtonColor();
-                    buttonState = true;
-                    break;
-                case 2 :
-                    if (s.length()!=0) {
-                        passwordCheck = true;
-                    } else {
-                        passwordCheck = false;
-                    }
-
-                    setButtonColor();
-                    buttonState = true;
-                    break;
-            }
-        }
-    }
 }

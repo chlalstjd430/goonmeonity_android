@@ -23,7 +23,6 @@ public class CommunityMainPresenter {
     BoardCategory boardCategory;
     String mCategory;
     int currentPage;
-    String keyword;
 
     MutableLiveData<ArrayList<BoardInfo>> boardList = new MutableLiveData<>();
     SingleLiveEvent<Void> emptyDataCall = new SingleLiveEvent<>();
@@ -42,23 +41,45 @@ public class CommunityMainPresenter {
             case 1 :
                 //API 완성시 카테고리 API와 통신하는 로직 추가
                 //통신해서 카테고리별 리스트 데이터를 받아오면 어댑터를 다시 정의해주는 로직 실행
-                mCategory = boardCategory.FREE.toString();
-                getBoardList();
-                break;
-            case 2 :
                 mCategory = boardCategory.COUNSEL.toString();
                 getBoardList();
                 break;
-            case 3 :
+            case 2 :
                 mCategory = boardCategory.INFORMATION.toString();
                 getBoardList();
+                break;
+            case 3 :
+                mCategory = boardCategory.FREE.toString();
+                getBoardList();
+                break;
+
+            case 4 :
+                getPopularList();
                 break;
         }
     }
 
     public void getBoardList() {
-        Log.d("Mytag", mCategory);
         communityService.getBoardList(mCategory, currentPage)
+                .enqueue(new Callback<SearchBoardResponse>() {
+                    @Override
+                    public void onResponse(Call<SearchBoardResponse> call, Response<SearchBoardResponse> response) {
+                        if (response.body().getBoardsCount()==0) {
+                            emptyDataCall.call();
+                        } else {
+                            boardList.setValue(response.body().getBoardInfo());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SearchBoardResponse> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    private void getPopularList() {
+        communityService.getPopularList(currentPage)
                 .enqueue(new Callback<SearchBoardResponse>() {
                     @Override
                     public void onResponse(Call<SearchBoardResponse> call, Response<SearchBoardResponse> response) {

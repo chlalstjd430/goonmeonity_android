@@ -19,4 +19,7 @@ public interface CommunityService {
     @POST("/v1/boards/board")
     Call<BoardInfoResponse> postArticle(@Header("accessToken")String accessToken,
                                           @Body CreateBoardRequest createBoardRequest);
+
+    @POST("/v1/boards/popular")
+    Call<SearchBoardResponse> getPopularList(@Query("currentPage") int currentPage);
 }

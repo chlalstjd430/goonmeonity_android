@@ -125,6 +125,21 @@ public class CommunityMainFragment extends Fragment {
             }
         });
 
+        category4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.clickCategory(4);
+                category4.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                category4.setTextColor(getResources().getColor(R.color.colorWhite));
+                category2.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category2.setTextColor(getResources().getColor(R.color.colorBlack));
+                category1.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category1.setTextColor(getResources().getColor(R.color.colorBlack));
+                category3.setBackgroundColor(getResources().getColor(R.color.colorLightGrey));
+                category3.setTextColor(getResources().getColor(R.color.colorBlack));
+            }
+        });
+
         buttonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
